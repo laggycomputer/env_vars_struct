@@ -13,7 +13,7 @@
 //!     "HAT",
 //! );
 //!
-//! // safety: there are no strange characters here and nobody should do this in practice
+//! // safety: no \0, =, or NUL here and nobody should do this in practice
 //! unsafe {
 //!     std::env::set_var("DATABASE_HOST", "host");
 //!     std::env::set_var("DATABASE_PORT", "5432");
