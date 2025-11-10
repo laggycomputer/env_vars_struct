@@ -8,6 +8,6 @@ authors = ["laggycomputer"]
 proc-macro = true
 
 [dependencies]
-quote = "1.0.42"
-syn = "2.0.110"
-proc-macro2 = "1.0.103"
+quote = "^1"
+syn = "^2"
+proc-macro2 = "^1"
