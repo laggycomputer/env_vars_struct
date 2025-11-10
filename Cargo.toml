@@ -1,0 +1,13 @@
+[package]
+name = "env_vars_struct"
+version = "0.1.0"
+edition = "2024"
+authors = ["laggycomputer"]
+
+[lib]
+proc-macro = true
+
+[dependencies]
+quote = "1.0.42"
+syn = "2.0.110"
+proc-macro2 = "1.0.103"
