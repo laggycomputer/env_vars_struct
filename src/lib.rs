@@ -7,17 +7,26 @@
 //! env_vars_struct!(
 //!     "DATABASE.HOST",
 //!     "DATABASE.PORT",
-//!     "DATABASE.NAME",
 //!     "API.KEY",
 //!     "API.SECRET",
 //!     "CACHE.REDIS.URL",
-//!     "HAT"
+//!     "HAT",
 //! );
+//!
+//! // safety: there are no strange characters here and nobody should do this in practice
+//! unsafe {
+//!     std::env::set_var("DATABASE_HOST", "host");
+//!     std::env::set_var("DATABASE_PORT", "5432");
+//!     std::env::set_var("API.KEY", "magic key");
+//!     std::env::set_var("API.SECRET", "magic secret");
+//!     std::env::set_var("CACHE.REDIS.URL", "redis://someplace");
+//!     std::env::set_var("HAT", "fedora");
+//! }
 //!
 //! let vars = Vars::new();
 //! println!("db: {}:{}", vars.database.host, vars.database.port);
 //! println!("redis: {}", vars.cache.redis.url);
-//! println!("api key: {}", vars.api.key);
+//! println!("api: key {}, secret {}", vars.api.key, vars.api.secret);
 //! println!("hat: {}", vars.hat);
 //! ```
 
