@@ -1,16 +1,16 @@
 //! A simple macro to define nested structs which are populated from a list of expected variables passed at compile-tine.
 //!
-//! Names are converted to `snake_case` and colons are treated as separators indicating a nested struct.
+//! Names are converted to `snake_case` and periods are treated as separators indicating a nested struct.
 //! ```
 //! use env_vars_struct::env_vars_struct;
 //!
 //! env_vars_struct!(
-//!     "DATABASE:HOST",
-//!     "DATABASE:PORT",
-//!     "DATABASE:NAME",
-//!     "API:KEY",
-//!     "API:SECRET",
-//!     "CACHE:REDIS:URL",
+//!     "DATABASE.HOST",
+//!     "DATABASE.PORT",
+//!     "DATABASE.NAME",
+//!     "API.KEY",
+//!     "API.SECRET",
+//!     "CACHE.REDIS.URL",
 //!     "HAT"
 //! );
 //!
@@ -42,7 +42,7 @@ pub fn env_vars_struct(input: TokenStream) -> TokenStream {
     let mut root = Node::default();
 
     for var_name in &input.vars {
-        let parts = var_name.split(':').collect::<Vec<_>>();
+        let parts = var_name.split('.').collect::<Vec<_>>();
         insert_path(&mut root, &parts, var_name);
     }
 
