@@ -1,25 +1,25 @@
 //! A simple macro to define nested structs which are populated from a list of expected variables passed at compile-tine.
 //!
-//! Names are converted to `snake_case` and periods are treated as separators indicating a nested struct.
+//! Names are converted to `snake_case` and double underscores `__` are treated as separators indicating a nested struct.
 //! ```
 //! use env_vars_struct::env_vars_struct;
 //!
 //! env_vars_struct!(
-//!     "DATABASE.HOST",
-//!     "DATABASE.PORT",
-//!     "API.KEY",
-//!     "API.SECRET",
-//!     "CACHE.REDIS.URL",
+//!     "DATABASE__HOST",
+//!     "DATABASE__PORT",
+//!     "API__KEY",
+//!     "API__SECRET",
+//!     "CACHE__REDIS__URL",
 //!     "HAT",
 //! );
 //!
 //! // safety: no \0, =, or NUL here and nobody should do this in practice
 //! unsafe {
-//!     std::env::set_var("DATABASE_HOST", "host");
-//!     std::env::set_var("DATABASE_PORT", "5432");
-//!     std::env::set_var("API.KEY", "magic key");
-//!     std::env::set_var("API.SECRET", "magic secret");
-//!     std::env::set_var("CACHE.REDIS.URL", "redis://someplace");
+//!     std::env::set_var("DATABASE__HOST", "host");
+//!     std::env::set_var("DATABASE__PORT", "5432");
+//!     std::env::set_var("API__KEY", "magic key");
+//!     std::env::set_var("API__SECRET", "magic secret");
+//!     std::env::set_var("CACHE__REDIS__URL", "redis://someplace");
 //!     std::env::set_var("HAT", "fedora");
 //! }
 //!
@@ -51,7 +51,7 @@ pub fn env_vars_struct(input: TokenStream) -> TokenStream {
     let mut root = Node::default();
 
     for var_name in &input.vars {
-        let parts = var_name.split('.').collect::<Vec<_>>();
+        let parts = var_name.split("__").collect::<Vec<_>>();
         insert_path(&mut root, &parts, var_name);
     }
 
