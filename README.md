@@ -7,3 +7,4 @@ Todo (help appreciated):
 * Optional variables
 * Fallible parsing (e.g. a variable should be `bool`)
 * Configurability (e.g. separators besides `__`)
+* Disallow/collapse empty segments (e.g. leading separator or multiple separators)
